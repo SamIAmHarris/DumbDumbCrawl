@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "481710185953",
+    "firebase_url": "https://dumbdumbcrawl.firebaseio.com",
+    "project_id": "dumbdumbcrawl",
+    "storage_bucket": "dumbdumbcrawl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481710185953:android:5ac2e527dba57200",
+        "android_client_info": {
+          "package_name": "com.jackrabbitmobile.dumbdumbcrawl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481710185953-8clcu372jqumhprr9kc666mmng7njpmq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jackrabbitmobile.dumbdumbcrawl",
+            "certificate_hash": "18E65ADE62AB60A49D73CF4D7C8EF9E39BCDC06D"
+          }
+        },
+        {
+          "client_id": "481710185953-so141k9blipjvpk7hue415p5jf1ngoku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVpbvwU4bBfR8Xb66t8spHyi0PJ_gqDBE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481710185953-so141k9blipjvpk7hue415p5jf1ngoku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
