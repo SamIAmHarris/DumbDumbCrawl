@@ -2,15 +2,11 @@ package com.jackrabbitmobile.dumbdumbcrawl;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +18,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +27,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -137,7 +129,7 @@ public class LogInActivity extends AppCompatActivity {
                             if(user != null) {
                                 user.updateEmail(userInputValue);
                             }
-                            Intent mainIntent = new Intent(LogInActivity.this, MainActivity.class);
+                            Intent mainIntent = new Intent(LogInActivity.this, TabActivity.class);
                             startActivity(mainIntent);
                         }
                     }
@@ -207,7 +199,7 @@ public class LogInActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.i(TAG, "Anonymous User Sign Up Success");
-                            Intent mainIntent = new Intent(LogInActivity.this, MainActivity.class);
+                            Intent mainIntent = new Intent(LogInActivity.this, TabActivity.class);
                             startActivity(mainIntent);
                         }
 
