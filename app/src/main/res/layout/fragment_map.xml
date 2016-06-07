@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <fragment
+        android:id="@+id/map"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:paddingTop="?android:attr/actionBarSize"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:mapType="normal"
+        map:uiTiltGestures="false"
+        map:uiRotateGestures="false"
+        map:uiScrollGestures="true"
+        map:uiZoomGestures="true"
+        map:uiZoomControls="false"
+        map:uiCompass="true"
+        map:cameraTargetLat="30.2686147"
+        map:cameraTargetLng="-97.7404872"
+        map:cameraZoom="12"/>
+
+</RelativeLayout>

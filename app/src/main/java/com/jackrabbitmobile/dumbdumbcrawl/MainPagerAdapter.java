@@ -24,7 +24,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new TwitterFragment();
             case 2:
-                return new MapFragment();
+                return new MapTabFragment();
             default:
                 return new ListFragment();
         }
