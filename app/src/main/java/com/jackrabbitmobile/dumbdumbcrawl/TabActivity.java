@@ -1,6 +1,7 @@
 package com.jackrabbitmobile.dumbdumbcrawl;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class TabActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tab);
         ButterKnife.bind(this);
 
+        showSelectStartingLocationDialog();
+
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mainPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
@@ -42,5 +45,11 @@ public class TabActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showSelectStartingLocationDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        StartingPointDialogFragment startingPointDialogFragment = StartingPointDialogFragment.newInstance(0);
+        startingPointDialogFragment.show(fm, StartingPointDialogFragment.TAG);
     }
 }
