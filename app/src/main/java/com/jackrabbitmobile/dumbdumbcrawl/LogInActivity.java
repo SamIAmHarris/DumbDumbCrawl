@@ -20,6 +20,12 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitationResult;
+import com.google.android.gms.appinvite.AppInviteReferral;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -35,7 +41,7 @@ import butterknife.ButterKnife;
  * Created by SamMyxer on 6/6/16.
  */
 
-public class LogInActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
 
     @BindView(R.id.activity_login_loginImageView)
@@ -50,6 +56,8 @@ public class LogInActivity extends AppCompatActivity {
 
     CallbackManager callbackManager;
 
+    GoogleApiClient googleApiClient;
+
     private String TAG = "LogInActivity";
 
     private FirebaseAuth auth;
@@ -63,6 +71,37 @@ public class LogInActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        // Build GoogleApiClient with AppInvite API for receiving deep links
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(AppInvite.API)
+                .build();
+
+        // Check if this app was launched from a deep link. Setting autoLaunchDeepLink to true
+        // would automatically launch the deep link if one is found.
+        boolean autoLaunchDeepLink = false;
+        AppInvite.AppInviteApi.getInvitation(googleApiClient, this, autoLaunchDeepLink)
+                .setResultCallback(
+                        new ResultCallback<AppInviteInvitationResult>() {
+                            @Override
+                            public void onResult(@NonNull AppInviteInvitationResult result) {
+                                if (result.getStatus().isSuccess()) {
+                                    // Extract deep link from Intent
+                                    Intent intent = result.getInvitationIntent();
+                                    String deepLink = AppInviteReferral.getDeepLink(intent);
+
+                                    // Handle the deep link. For example, open the linked
+                                    // content, or apply promotional credit to the user's
+                                    // account.
+
+                                    Toast.makeText(LogInActivity.this,
+                                            "Deep Link Received", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Log.d(TAG, "getInvitation: no deep link found.");
+                                }
+                            }
+                        });
 
         auth =  FirebaseAuth.getInstance();
 
@@ -205,5 +244,10 @@ public class LogInActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        //Yea buddy this is here
     }
 }
