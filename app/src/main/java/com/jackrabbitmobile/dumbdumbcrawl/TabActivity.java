@@ -1,5 +1,7 @@
 package com.jackrabbitmobile.dumbdumbcrawl;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -17,11 +19,23 @@ public class TabActivity extends AppCompatActivity {
     TabLayout tabLayout;
     MainPagerAdapter mainPagerAdapter;
 
+    int autoLocation = 0;
+
+    public static final String AUTO_LOCATION_EXTRA = "tabactivity.auto_location_extra";
+
+    public static Intent newIntent(Context context, int autoLocation) {
+        Intent tabIntent = new Intent(context, TabActivity.class);
+        tabIntent.putExtra(AUTO_LOCATION_EXTRA, autoLocation);
+        return tabIntent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
         ButterKnife.bind(this);
+
+        autoLocation = getIntent().getIntExtra(AUTO_LOCATION_EXTRA, 0);
 
         showSelectStartingLocationDialog();
 
@@ -49,7 +63,8 @@ public class TabActivity extends AppCompatActivity {
 
     private void showSelectStartingLocationDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        StartingPointDialogFragment startingPointDialogFragment = StartingPointDialogFragment.newInstance(0);
+        StartingPointDialogFragment startingPointDialogFragment =
+                StartingPointDialogFragment.newInstance(autoLocation);
         startingPointDialogFragment.show(fm, StartingPointDialogFragment.TAG);
     }
 }

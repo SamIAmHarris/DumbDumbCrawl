@@ -65,6 +65,8 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
 
     private String userInputValue = "";
 
+    int autoLocation = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +97,8 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                                     // content, or apply promotional credit to the user's
                                     // account.
 
-                                    Toast.makeText(LogInActivity.this,
-                                            "Deep Link Received", Toast.LENGTH_LONG).show();
+                                    autoLocation = Integer.valueOf(
+                                            deepLink.replace("https://jackrabbitmobile.com/", ""));
                                 } else {
                                     Log.d(TAG, "getInvitation: no deep link found.");
                                 }
@@ -168,8 +170,9 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                             if(user != null) {
                                 user.updateEmail(userInputValue);
                             }
-                            Intent mainIntent = new Intent(LogInActivity.this, TabActivity.class);
-                            startActivity(mainIntent);
+                            Intent tabIntent = TabActivity
+                                    .newIntent(LogInActivity.this, autoLocation);
+                            startActivity(tabIntent);
                         }
                     }
                 });

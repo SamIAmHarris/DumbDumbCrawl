@@ -138,6 +138,13 @@ public class StartingPointDialogFragment extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initViews();
+    }
+
+    private void initViews() {
+
+        setAutoStartLocation();
+
         doneTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +152,6 @@ public class StartingPointDialogFragment extends DialogFragment {
             }
         });
     }
-
 
 
     @Override
@@ -207,6 +213,33 @@ public class StartingPointDialogFragment extends DialogFragment {
 
         setCheckboxTextViews();
 
+    }
+
+    public void setAutoStartLocation() {
+        if(preselectedLocation != 0) {
+            switch (preselectedLocation) {
+                case 1:
+                    startingPointCheckbox1.setChecked(true);
+                    break;
+                case 2:
+                    startingPointCheckbox2.setChecked(true);
+                    break;
+                case 3:
+                    startingPointCheckbox3.setChecked(true);
+                    break;
+                case 4:
+                    startingPointCheckbox4.setChecked(true);
+                    break;
+                case 5:
+                    startingPointCheckbox5.setChecked(true);
+                    break;
+                case 6:
+                    startingPointCheckbox6.setChecked(true);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private class StartingPointPreferences {
